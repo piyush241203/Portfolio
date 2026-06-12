@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Allerta+Stencil&family=Archivo:wght@400;600;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-archivo: "Archivo", sans-serif;
+  --font-allerta: "Allerta Stencil", sans-serif;
+  --color-brand-orange: #FF9E7C;
+}
+
+:root {
+  --orange: #F97316;
+  --orange-dark: #ea6c0a;
+  --black: #0A0A0A;
+  --white: #FFFFFF;
+  --gray-light: #F5F5F5;
+  --gray-bg: #F8F8F8;
+  --gray-text: #666666;
+  --gray-border: #E5E5E5;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* font-family: 'Space Grotesk', 'Inter', sans-serif; */
+  background: #ffffff;
+  color: #0A0A0A;
+  overflow-x: hidden;
+}
+
+/* Marquee Animation */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  display: flex;
+  animation: marquee 20s linear infinite;
+  width: max-content;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+::-webkit-scrollbar-thumb {
+  background: #F97316;
+  border-radius: 3px;
+}
+
+/* Section label style */
+.section-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: #F97316;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.section-label::after {
+  content: '';
+  display: block;
+  width: 32px;
+  height: 2px;
+  background: #F97316;
+}
+
+/* Orange dot */
+.orange-dot {
+  width: 8px;
+  height: 8px;
+  background: #F97316;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* Dotted pattern */
+.dot-pattern {
+  background-image: radial-gradient(#00000020 1px, transparent 1px);
+  background-size: 16px 16px;
+}
+
+/* Custom button */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: #F97316;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  text-decoration: none;
+}
+
+.btn-primary:hover {
+  background: #ea6c0a;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(249, 115, 22, 0.35);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: #0A0A0A;
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 1.5px solid #0A0A0A;
+  text-decoration: none;
+}
+
+.btn-outline:hover {
+  background: #0A0A0A;
+  color: white;
+  transform: translateY(-1px);
+}
