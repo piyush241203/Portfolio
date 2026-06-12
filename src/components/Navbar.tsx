@@ -35,10 +35,10 @@ export default function Navbar() {
       </div>
 
       {/* Sticky Links Container */}
-      <div className="w-full lg:max-w-[calc(100svw-30px)] mx-auto px-6 lg:px-12 h-full flex flex-col relative">
+      <div className="w-full max-w-[calc(100svw-20px)] lg:max-w-[calc(100svw-30px)] mx-auto px-6 lg:px-12 h-full flex flex-col relative">
          {/* Push links down to the bottom of the first viewport */}
          {/* On mobile, might need a bit less so they stay on screen if there's address bars */}
-         <div className="h-[calc(100svh-40px)] md:h-[calc(100svh-80px)] w-full flex-shrink-0" />
+         <div className="h-[690px] md:h-[calc(100svh-80px)] w-full flex-shrink-0" />
          
          <div className="sticky top-0 md:top-1 w-full flex justify-start md:justify-end pointer-events-auto z-50">
             {/* The Links Group */}

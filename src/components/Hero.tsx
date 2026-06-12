@@ -10,14 +10,14 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="min-h-screen lg:min-h-screen max-w-[100vw] bg-white w-full overflow-hidden flex justify-center lg:items-center items-start relative">
+    <section id="home" className="min-h-[760px] lg:min-h-screen max-w-[100vw] bg-white w-full overflow-hidden flex justify-center lg:items-center items-start relative">
 
 
       <div className="relative max-w-[1280px] mx-auto w-full px-6 py-24 flex flex-col xl:flex-row items-center justify-center gap-4 xl:gap-6">
 
         {/* Left Column */}
         <motion.div
-          className="absolute left-[40px] top-20 lg:left-14 z-60 lg:top-9"
+          className="hidden lg:block absolute left-[40px] top-20 lg:left-14 z-60 lg:top-9 w-[320px] h-[340px] lg:w-auto lg:h-auto bg-red-400"
           initial={{ opacity: 0, x: -60 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
@@ -72,7 +72,7 @@ export default function Hero() {
           </div>
         </motion.div> */}
 
-        <div className='w-[19%] h-[81px] lg:h-[40vh]'>
+        <div className='w-[19%] h-[70px] lg:h-[40vh]'>
 
           <motion.div
             className="md:hidden absolute left-8 z-60 -bottom-18"
@@ -143,6 +143,33 @@ export default function Hero() {
             className="object-contain"
             priority
           /> */}
+
+          <motion.div
+          className="lg:hidden absolute left-[15px] -top-[14px] w-[calc(100%-20px)] h-[200px] z-30"
+          initial={{ opacity: 0, x: -60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
+        >
+          <div className='flex flex-col w-full xl:w-auto'>
+            <div className='flex flex-col w-full lg:gap-[5px] gap-[10px] items-start'>
+              <div className="flex items-center lg:gap-3 gap-2 mb-4">
+                <span className="text-[#FF9E7C] font-archivo font-semibold text-[18px] md:text-[20px] uppercase tracking-widest leading-none">HELLO, I'M</span>
+                <div className="lg:h-[3px] w-[50px] h-[2px] md:w-20 bg-[#FF9E7C] rounded-full"></div>
+              </div>
+
+              <div className="flex flex-col -mt-2 md:-mt-4 mb-0">
+                <h1 className="font-archivo font-semibold text-[60px] lg:text-[130px] xl:text-[134px] leading-[0.9] text-transparent tracking-normal [-webkit-text-stroke:2px_white] lg:[-webkit-text-stroke:3px_black]">
+                  PIYUSH
+                </h1>
+                <h1 className="font-archivo font-semibold text-[34px] lg:text-[80px] xl:text-[77px] leading-[0.9] text-white lg:text-black tracking-normal">
+                  NINAWE
+                </h1>
+              </div>
+            </div>
+          </div>
+
+        </motion.div>
+
 
             {/* User Image */}
             <div className="absolute inset-x-0 bottom-[0px] flex justify-center h-[100%] w-[100%] left-[0%] pointer-events-none">
