@@ -17,7 +17,7 @@ export default function Hero() {
 
         {/* Left Column */}
         <motion.div
-          className="hidden lg:block absolute left-[40px] top-20 lg:left-14 z-60 lg:top-9 w-[320px] h-[340px] lg:w-auto lg:h-auto bg-red-400"
+          className="hidden lg:block absolute left-[40px] top-20 lg:left-14 z-60 lg:top-9 w-[320px] h-[340px] lg:w-auto lg:h-auto"
           initial={{ opacity: 0, x: -60 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
@@ -145,7 +145,7 @@ export default function Hero() {
           /> */}
 
           <motion.div
-          className="lg:hidden absolute left-[15px] -top-[14px] w-[calc(100%-20px)] h-[200px] z-30"
+          className="lg:hidden absolute left-[10px] -top-[18px] w-[calc(100%-20px)] h-[200px] z-30"
           initial={{ opacity: 0, x: -60 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
@@ -182,7 +182,7 @@ export default function Hero() {
               />
             </div>
             {/* Top Right Black Circle with Star */}
-            <div className="absolute top-[5px] right-[1px] lg:top-0 lg:right-[2px] w-10 h-10 lg:w-15 lg:h-15 bg-black rounded-full flex items-center justify-center z-30 shadow-xl">
+            <div className="absolute top-[4px] right-[1px] lg:top-0 lg:right-[2px] w-10 h-10 lg:w-15 lg:h-15 bg-black rounded-full flex items-center justify-center z-30 shadow-xl">
               <motion.div
                 animate={{ rotate: 360 }}
                 transition={{ duration: 12, repeat: Infinity, ease: 'linear' }}
