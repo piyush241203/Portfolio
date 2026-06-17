@@ -106,7 +106,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            className="absolute left-8 lg:left-14 z-70 lg:bottom-0 -bottom-88"
+            className="absolute left-[50%] translate-x-[-50%] md:translate-x-none lg:left-14 z-70 lg:bottom-0 -bottom-82"
             initial={{ opacity: 0, x: -60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
