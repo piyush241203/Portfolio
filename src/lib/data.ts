@@ -193,3 +193,9 @@ export const footerNav = {
   services: ['AI & Machine Learning', 'Full Stack Development', 'Automation Solutions', 'Cloud & Deployment'],
   quickLinks: ['My Projects', 'Resume', 'GitHub', 'Blog'],
 };
+
+export const aboutSkills = [
+  { name: 'React', iconKey: 'react', delay: 300, color: '#61DAFB' },
+  { name: 'Node.js', iconKey: 'node', delay: 450, color: '#339933' },
+  { name: 'MongoDB', iconKey: 'mongodb', delay: 600, color: '#13AA52' },
+];

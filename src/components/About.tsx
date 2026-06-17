@@ -1,142 +1,170 @@
 'use client';
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { stats, infoCards } from '@/lib/data';
-import { Download, ArrowUpRight, MapPin, GraduationCap, Calendar, Send } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
+import { aboutSkills } from '@/lib/data';
+import { FaReact, FaNodeJs } from 'react-icons/fa';
+import { SiMongodb } from 'react-icons/si';
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 40 },
-  visible: (i = 0) => ({
-    opacity: 1, y: 0,
-    transition: { delay: i * 0.12, duration: 0.6, ease: 'easeOut' as const },
-  }),
+const iconMap = {
+  react: FaReact,
+  node: FaNodeJs,
+  mongodb: SiMongodb,
 };
 
-const infoIcons = [
-  <MapPin key="map" size={20} className="text-[#F97316]" />,
-  <GraduationCap key="grad" size={20} className="text-[#F97316]" />,
-  <Calendar key="cal" size={20} className="text-[#F97316]" />,
-  <Send key="send" size={20} className="text-[#F97316]" />,
-];
+
+const dropBounce = {
+  hidden: { y: -300, opacity: 0 },
+  visible: {
+    y: [-300, 0, -40, 0, -15, 0],
+    opacity: [0, 1, 1, 1, 1, 1],
+    transition: {
+      duration: 1.2,
+      times: [0, 0.5, 0.65, 0.8, 0.9, 1],
+      ease: [
+        [0.28, 0.84, 0.42, 1],
+        [0.28, 0.84, 0.42, 1],
+        [0.28, 0.84, 0.42, 1],
+        [0.28, 0.84, 0.42, 1],
+        [0.28, 0.84, 0.42, 1]
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      ] as any
+    }
+  }
+};
+
+const fadeLeft = {
+  hidden: { opacity: 0, x: 50 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6, ease: 'easeOut' as const, delay: 0.6 }
+  }
+};
+
+const zoomIn = (delay: number) => ({
+  hidden: { scale: 0, opacity: 0 },
+  visible: {
+    scale: 1,
+    opacity: 1,
+    transition: { type: 'spring' as const, stiffness: 200, delay: delay / 1000 }
+  }
+});
 
 export default function About() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: '-80px' });
+
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      // Check if scrolled past the initial hero height
+      setScrolled(window.scrollY > window.innerHeight * 0.99);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
 
   return (
-    <section id="about" ref={ref} className="py-24 bg-white">
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Section Label */}
-        <motion.div
-          className="section-label mb-8"
-          variants={fadeUp} custom={0}
-          initial="hidden" animate={inView ? 'visible' : 'hidden'}
-        >
-          ABOUT ME
-        </motion.div>
+    <motion.section
+      id="about"
+      initial="hidden"
+      whileInView="visible"
+      viewport={{ once: true, amount: 0.2 }}
+      className={`bg-[#FEA789] pt-32 pb-10 md:pb-40 px-6 md:px-12 w-full relative overflow-hidden font-archivo ${
+            scrolled 
+              ? 'rounded-none transition-all duration-600 ease-in' 
+              : 'lg:rounded-t-[60px] rounded-t-[50px] rounded-b-none transition-all duration-600 ease-in-out'
+          }`}
+    >
+      <div className="max-w-6xl mx-auto flex flex-col md:flex-row gap-16 items-start">
 
-        {/* Top Grid: headline + stats */}
-        <div className="grid lg:grid-cols-2 gap-16 items-start">
-          {/* Left: Headline */}
-          <motion.div variants={fadeUp} custom={1} initial="hidden" animate={inView ? 'visible' : 'hidden'}>
-            <h2 className="text-5xl md:text-6xl font-black leading-tight tracking-tight mb-6">
-              DRIVEN BY CODE.
-              <br />
-              FOCUSED ON
-              <br />
-              <span className="text-[#F97316]">SOLUTIONS.</span>
-              <span className="inline-flex w-10 h-10 bg-black rounded-full items-center justify-center ml-3 text-white text-lg align-middle">
-                ✦
-              </span>
-            </h2>
+        {/* Left Side: ID Badge and Skills */}
+        <div className="flex flex-col items-center w-full md:w-[350px] shrink-0 mt-0 md:mt-0">
 
-            <p className="text-gray-500 leading-relaxed mb-8 max-w-md">
-              I&apos;m a passionate AI/ML Engineer and Full Stack Developer who loves turning complex problems
-              into simple, scalable and beautiful solutions that create real impact.
-            </p>
-
-            {/* Mission */}
-            <div className="border-l-4 border-[#F97316] pl-4 mb-8">
-              <div className="text-[#F97316] font-semibold text-xs tracking-widest uppercase mb-2">MY MISSION</div>
-              <p className="text-gray-600 text-sm leading-relaxed">
-                To build impactful digital products that solve real-world problems and create value through
-                clean code, intelligent systems and thoughtful user experiences.
-              </p>
-            </div>
-
-            <motion.a
-              href="/resume.pdf"
-              download
-              className="btn-outline inline-flex items-center gap-2"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              DOWNLOAD RESUME
-              <Download size={16} />
-            </motion.a>
-          </motion.div>
-
-          {/* Right: Stats grid */}
           <motion.div
-            className="grid grid-cols-2 gap-0"
-            variants={fadeUp} custom={2}
-            initial="hidden" animate={inView ? 'visible' : 'hidden'}
+            variants={dropBounce}
+            className="relative flex justify-center w-full"
+            data-aos="drop-bounce"
           >
-            {stats.map((stat, i) => (
-              <motion.div
-                key={stat.value}
-                className="p-8 border-b border-r border-gray-100 last:border-r-0"
-                style={{
-                  borderRight: i % 2 === 0 ? '1px solid #F0F0F0' : 'none',
-                  borderBottom: i < 2 ? '1px solid #F0F0F0' : 'none',
-                }}
-                whileHover={{ backgroundColor: '#FFF7F0' }}
-                transition={{ duration: 0.2 }}
-              >
-                <div className="text-5xl font-black text-[#F97316] mb-2">{stat.value}</div>
-                <div className="font-bold text-sm mb-1">{stat.label}</div>
-                <div className="text-gray-400 text-xs leading-relaxed">{stat.desc}</div>
-              </motion.div>
-            ))}
+            {/* Lanyard string */}
+            <div className="absolute -top-32 left-1/2 w-3 h-40 bg-black transform -translate-x-1/2 shadow-inner z-0"></div>
+            {/* Lanyard clip */}
+            <div className="absolute -top-6 left-1/2 w-6 h-12 bg-gray-300 rounded border border-gray-400 transform -translate-x-1/2 z-10 shadow-[0_2px_10px_rgba(0,0,0,0.3)]"></div>
 
-            {/* Location & Availability row */}
-            <div className="col-span-2 flex items-center justify-between pt-6 px-2">
-              <div className="flex items-center gap-2">
-                <span className="w-2.5 h-2.5 rounded-full bg-[#F97316]" />
-                <span className="text-sm font-semibold">BASED IN INDIA</span>
+            {/* Badge Card */}
+            <div className="bg-gray-900 w-full max-w-[280px] rounded-2xl p-3 shadow-[0_20px_40px_rgba(0,0,0,0.4)] relative z-20 transform -rotate-3 hover:rotate-0 transition-transform duration-500">
+              {/* Cutout Hole */}
+              <div className="absolute -top-3 left-1/2 w-16 h-6 bg-gray-900 rounded-t-xl transform -translate-x-1/2 flex justify-center items-center">
+                <div className="w-8 h-2 bg-black/30 rounded-full shadow-inner"></div>
               </div>
-              <div className="flex items-center gap-2">
-                <span className="text-sm text-gray-500">Available for work</span>
-                <span className="w-2.5 h-2.5 rounded-full bg-green-400 animate-pulse" />
+              {/* Image Container */}
+              <div className="w-full aspect-[3/4] overflow-hidden rounded-xl bg-gray-800 border-2 border-transparent">
+                <img
+                  // src="/Piyush.png"
+                  src="/about_img1.png"
+                  alt="Piyush Ninawe"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
           </motion.div>
+
         </div>
 
-        {/* Info Cards Row */}
+        {/* Right Side: Info Content */}
         <motion.div
-          className="grid grid-cols-2 md:grid-cols-4 gap-0 mt-12 border border-gray-100 rounded-2xl overflow-hidden"
-          variants={fadeUp} custom={3}
-          initial="hidden" animate={inView ? 'visible' : 'hidden'}
+          variants={fadeLeft}
+          className="flex-1 text-white mt-2 md:mt-0 relative z-20"
+          data-aos="fade-left"
+          data-aos-delay="200"
         >
-          {infoCards.map((card, i) => (
-            <motion.div
-              key={card.title}
-              className="flex items-start gap-4 p-6 border-r border-gray-100 last:border-r-0"
-              whileHover={{ backgroundColor: '#FFF7F0' }}
-              transition={{ duration: 0.2 }}
-            >
-              <div className="w-10 h-10 bg-orange-50 rounded-xl flex items-center justify-center flex-shrink-0">
-                {infoIcons[i]}
-              </div>
-              <div>
-                <div className="font-bold text-xs tracking-wider text-gray-900 mb-1">{card.title}</div>
-                <div className="text-gray-400 text-xs leading-relaxed">{card.desc}</div>
-              </div>
-            </motion.div>
-          ))}
+          <h2 className="text-4xl md:text-5xl font-bold text-black mb-4">Hello!</h2>
+          <p className="text-lg font-medium mb-12 leading-relaxed max-w-3xl text-orange-50">
+            Hi, my name is <span className="text-black text-xl font-semibold mx-1 tracking-wide uppercase">Piyush Ninawe</span>, a passionate AI/ML Engineer and Full Stack Developer based in Nagpur, India, dedicated to crafting clean, functional, and highly scalable web applications.
+          </p>
+
+          {/* Horizontal Skills Row (Transparent & Large) */}
+          {/* <div className="flex items-center gap-10 mt-8">
+            {aboutSkills.map((skill) => {
+              const IconComponent = iconMap[skill.iconKey as keyof typeof iconMap];
+              return (
+                <motion.div
+                  key={skill.name}
+                  variants={zoomIn(skill.delay)}
+                  whileHover={{ scale: 1.1 }}
+                  className="cursor-pointer drop-shadow-2xl"
+                  title={skill.name}
+                  data-aos="zoom-in"
+                  data-aos-delay={skill.delay}
+                >
+                  {IconComponent && (
+                    <IconComponent
+                      className="w-20 h-20 md:w-24 md:h-24 transition-all duration-300 hover:brightness-110"
+                      style={{ color: skill.color }}
+                    />
+                  )}
+                </motion.div>
+              );
+            })}
+          </div> */}
+
         </motion.div>
       </div>
-    </section>
+
+      {/* Torn paper divider at bottom */}
+      <div className="absolute bottom-0 left-0 w-full pointer-events-none z-30 transform translate-y-1">
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" className="w-full h-12 md:h-20 fill-[#F8F8F8]">
+          <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V120H0V95.8C59.71,118.08,130.83,119.62,189.5,99.8,242.79,81.82,282.88,63.6,321.39,56.44Z"></path>
+        </svg>
+      </div>
+
+      {/* Decorative stars */}
+      <div className="absolute top-10 right-10 md:right-20 opacity-30 animate-pulse">
+        <img src="/star.png" alt="Star" className="w-16 h-16 object-contain brightness-0 invert" />
+      </div>
+      <div className="absolute bottom-2 md:bottom-20 left-4 md:left-20 opacity-30 animate-pulse" style={{ animationDelay: '1s' }}>
+        <img src="/star.png" alt="Star" className="w-20 h-20 object-contain brightness-0 invert" />
+      </div>
+    </motion.section>
   );
 }
