@@ -12,8 +12,18 @@ export default function Hero() {
   };
 
   return (
-    <section id="home" className="fixed top-0 left-0 w-full min-h-[650px] bg-white overflow-hidden flex justify-center lg:items-center items-start z-0">
+    <section id="home" className="fixed top-0 left-0 w-full h-screen bg-white overflow-hidden z-0">
 
+    <div
+        className="
+      h-full
+      overflow-y-auto
+      [&::-webkit-scrollbar]:hidden
+      [-ms-overflow-style:none]
+      [scrollbar-width:none]
+      flex justify-center lg:items-center items-start
+    "
+    >
 
       <div className="relative max-w-[1280px] mx-auto w-full flex flex-col xl:flex-row items-center justify-center gap-4 xl:gap-6">
 
@@ -32,7 +42,7 @@ export default function Hero() {
               </div>
 
               <div className="flex flex-col -mt-2 md:-mt-4 mb-0">
-                <h1 className="name-piyush font-archivo font-semibold text-[60px] lg:text-[130px] xl:text-[14px] leading-[0.9] text-[#ffffff] tracking-normal [-webkit-text-stroke:2px_#FF9E7C]">
+                <h1 className="name-piyush font-archivo font-semibold text-[60px] lg:text-[130px] xl:text-[134px] leading-[0.9] text-[#ffffff] tracking-normal [-webkit-text-stroke:2px_#FF9E7C]">
                   PIYU<span className="lg:[-webkit-text-stroke:2px_#FF9E7C]">SH</span>
                 </h1>
                 <h1 className="font-archivo font-semibold text-[34px] lg:text-[80px] xl:text-[77px] leading-[0.9] text-[#FF9E7C] tracking-normal">
@@ -96,7 +106,7 @@ export default function Hero() {
           </motion.div>
 
           <motion.div
-            className="hidden lg:block absolute left-8 lg:left-14 z-70 lg:bottom-0 -bottom-58"
+            className="absolute left-8 lg:left-14 z-70 lg:bottom-0 -bottom-88"
             initial={{ opacity: 0, x: -60 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8, ease: 'easeOut', delay: 0.1 }}
@@ -230,6 +240,7 @@ export default function Hero() {
 
         </motion.div>
 
+      </div>
       </div>
     </section >
   );
